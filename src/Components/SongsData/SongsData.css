@@ -1,0 +1,12 @@
+.receivedSongs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroller {
+  width: 400px;
+  height: 400px;
+  overflow-y: scroll;
+}

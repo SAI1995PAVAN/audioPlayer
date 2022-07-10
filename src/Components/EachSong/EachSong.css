@@ -1,0 +1,7 @@
+.eachsong {
+  border: 1px solid black;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

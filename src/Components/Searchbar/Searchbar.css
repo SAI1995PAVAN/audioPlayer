@@ -1,0 +1,21 @@
+.searchbar {
+  display: flex;
+  justify-content: center;
+  padding: 5px 40px;
+  margin: 10px;
+  align-items: center;
+}
+
+#inputCheckbox {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.searchbar img:hover {
+  transform: scale3d(45deg);
+}
+
+.checkBoxButton {
+  background: none;
+  border-radius: 5px;
+}

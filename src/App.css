@@ -1,38 +1,34 @@
-.App {
-  text-align: center;
-}
+/* .musicApp {
+  margin: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  grid-auto-rows: minmax(500px, auto);
+  grid-gap: 10px; */
+/* grid-template-areas: "musicPlayer" "songsData"; */
+/* } */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* #musicPlayer {
+  background-color: lightcoral;
+  border: 2px solid black;
+  border-radius: 10px; */
+/* grid-area: musicPlayer; */
+/* } */
+
+/* #songsData {
+  background-color: lightgreen;
+  border-radius: 10px;
+  font-size: 1em; */
+/* grid-area: songsData; */
+/* } */
+/* 
+@media only screen and(max-width:550px) {
+  .musicApp {
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-auto-rows: minmax(500px, auto);
+    grid-gap: 10px;
+    grid-template-areas: "musicPlayer" "songsData";
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */

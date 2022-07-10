@@ -1,0 +1,14 @@
+#playlist-button {
+  display: flex;
+  justify-content: center;
+  background-color: none;
+
+  margin: 20px 10px;
+}
+
+#playlist-button button {
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 5px;
+  width: 50%;
+}
