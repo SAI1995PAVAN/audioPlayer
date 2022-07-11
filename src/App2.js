@@ -10,6 +10,7 @@ import EachSong from "./Components/EachSong/EachSong";
 import AddToPlaylist from "./Components/AddToPlaylist/AddToPlaylist";
 import PlaylistSong from "./Components/PlaylistSong/PlaylistSong";
 import "bootstrap/dist/css/bootstrap.min.css";
+import FavouriteSongs from "./Components/Favourites/Favourites";
 
 class App2 extends React.Component {
   constructor() {
@@ -23,6 +24,8 @@ class App2 extends React.Component {
       individualCheckboxDisplay: "none",
       playlistSongs: [],
       songPlayingNow: [],
+      songImage: "",
+      favouriteSongs: [],
     };
   }
 
@@ -99,17 +102,30 @@ class App2 extends React.Component {
     );
   };
 
-  handlePlayFunction = () => {
+  handleSongPlaying = (uri) => {
     console.log(this.state.playlistSongs);
-    let songPlaying = this.state.playlistSongs[0];
-    this.setState({ songPlayingNow: [songPlaying] });
+    let songPlaying = this.state.playlistSongs.filter((item) => {
+      return item.track.uri === uri;
+    });
+    this.setState(
+      {
+        songPlayingNow: [...songPlaying],
+      },
+      () => {
+        this.setState({
+          songImage: this.state.songPlayingNow[0].track.album.images[1].url,
+        });
+      }
+    );
   };
 
-  handlePreviousFunction = () => {
-    let songPlaying;
-    if (this.state.playlistSongs.length === 0) {
-      this.setState({ songPlayingNow: [] });
-    }
+  handleFavourites = (uri) => {
+    let favouritesFiltered = this.state.playlistSongs.filter((item) => {
+      return item.track.uri === uri;
+    });
+    this.setState({
+      favouriteSongs: [...this.state.favouriteSongs, ...favouritesFiltered],
+    });
   };
 
   render() {
@@ -125,6 +141,7 @@ class App2 extends React.Component {
           <MusicPlayer
             playFunction={this.handlePlayFunction}
             // playSong={this.state.playSong[0]}
+            songImage={this.state.songImage}
           />
         </div>
         <div id="songsData">
@@ -177,13 +194,29 @@ class App2 extends React.Component {
                         trackName={item.track.name}
                         artistName={item.track.artists[0].name}
                         key={index}
+                        onClick={() => {
+                          this.handleSongPlaying(item.track.uri);
+                        }}
+                        handleFavourites={() => {
+                          this.handleFavourites(item.track.uri);
+                        }}
                       />
                     );
                   })}
                 </div>
               </Tab>
               <Tab eventKey="third" title="favourites">
-                Favourite songs
+                <div className="scroller">
+                  {this.state.favouriteSongs.map((item, index) => {
+                    return (
+                      <FavouriteSongs
+                        trackName={item.track.name}
+                        artistName={item.track.artists[0].name}
+                        key={index}
+                      />
+                    );
+                  })}
+                </div>
               </Tab>
             </Tabs>
           </div>

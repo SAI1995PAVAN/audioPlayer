@@ -7,6 +7,11 @@
 #songImage {
   height: 80%;
 }
+
+#songImage img {
+  width: 100%;
+}
+
 #playerFunctions {
   display: flex;
   justify-content: space-evenly;
