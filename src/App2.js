@@ -26,6 +26,7 @@ class App2 extends React.Component {
       songPlayingNow: [],
       songImage: "",
       favouriteSongs: [],
+      isPlaying: false,
     };
   }
 
@@ -128,6 +129,11 @@ class App2 extends React.Component {
     });
   };
 
+  handleplayPause = () => {
+    let songUri = this.state.songPlayingNow[0].track.uri;
+    console.log(songUri);
+  };
+
   render() {
     let filtered = this.state.data.filter((item) => {
       return item.track.name
@@ -139,7 +145,7 @@ class App2 extends React.Component {
       <div className="musicApp">
         <div id="musicPlayer">
           <MusicPlayer
-            playFunction={this.handlePlayFunction}
+            playPause={this.handleplayPause}
             // playSong={this.state.playSong[0]}
             songImage={this.state.songImage}
           />

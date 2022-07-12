@@ -10,7 +10,7 @@ import favouritesAfterClick from "./favourites.png";
 // import { SkipPreviousIcon, SkipNextIcon } from "@mui/icons-material";
 
 const MusicPlayer=(props)=> {
-  const{playSong,playFunction,songImage}=props
+  const{playSong,playPause,songImage}=props
     return (
       <div id="playSong">
         <div id="songImage">
@@ -21,10 +21,10 @@ const MusicPlayer=(props)=> {
           />
         </div>
         <div id="playerFunctions">
-          <button id="playPreviousFunction">
+          <button id="playPreviousFunction" >
             <img src={previous} alt="" width="40px" height="40px" />
           </button>
-          <button id="playFunction" onClick={playFunction}>
+          <button id="playFunction" onClick={playPause}>
             <img src={play} alt="" width="50px" height="50px" />
           </button>
           <button id="playNextFunction">
