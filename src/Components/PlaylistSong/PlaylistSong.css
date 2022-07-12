@@ -6,3 +6,11 @@
   border: 1px solid black;
   margin: 10px 10px;
 }
+
+.eachsongPlaylist button {
+  margin: 10px;
+  color: #fff;
+  background-color: blueviolet;
+  padding: 0px 30px;
+  font: 1em;
+}
