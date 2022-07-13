@@ -27,6 +27,7 @@ class App2 extends React.Component {
       songImage: "",
       favouriteSongs: [],
       isPlaying: false,
+      songUri: "",
     };
   }
 
@@ -104,17 +105,20 @@ class App2 extends React.Component {
   };
 
   handleSongPlaying = (uri) => {
-    console.log(this.state.playlistSongs);
+    // console.log(this.state.playlistSongs);
+
     let songPlaying = this.state.playlistSongs.filter((item) => {
       return item.track.uri === uri;
     });
     this.setState(
       {
+        isPlaying: !this.state.isPlaying,
         songPlayingNow: [...songPlaying],
       },
       () => {
         this.setState({
           songImage: this.state.songPlayingNow[0].track.album.images[1].url,
+          isPlaying: !this.state.isPlaying,
         });
       }
     );
@@ -129,9 +133,51 @@ class App2 extends React.Component {
     });
   };
 
-  handleplayPause = () => {
+  handleplay = () => {
+    let songlink = this.state.songPlayingNow[0].track.uri;
+  };
+
+  handleForward = () => {
     let songUri = this.state.songPlayingNow[0].track.uri;
-    console.log(songUri);
+    const index = this.state.playlistSongs.findIndex((obj) => {
+      return obj.track.uri === songUri;
+    });
+    if (index === this.state.playlistSongs.length - 1) {
+      let songplaying = this.state.playlistSongs[0];
+      this.setState({ songPlayingNow: [songplaying] }, () => {
+        console.log(this.state.songPlayingNow);
+      });
+    } else {
+      let songplaying = this.state.playlistSongs[index + 1];
+      this.setState({ songPlayingNow: [songplaying] }, () => {
+        console.log(this.state.songPlayingNow);
+      });
+    }
+  };
+
+  handlePrevious = () => {
+    let songUri = this.state.songPlayingNow[0].track.uri;
+    const index = this.state.playlistSongs.findIndex((obj) => {
+      return obj.track.uri === songUri;
+    });
+    if (index === 0) {
+      let songplaying = this.state.playlistSongs[0];
+      this.setState({ songPlayingNow: [songplaying] }, () => {
+        console.log(this.state.songPlayingNow);
+      });
+    } else {
+      let songplaying = this.state.playlistSongs[index - 1];
+      this.setState({ songPlayingNow: [songplaying] }, () => {
+        console.log(this.state.songPlayingNow);
+      });
+    }
+  };
+
+  handleDeleteFromPlaylists = (uri) => {
+    let newPlaylist = this.state.playlistSongs.filter((item) => {
+      return item.track.uri !== uri;
+    });
+    this.setState({ playlistSongs: [...newPlaylist] });
   };
 
   render() {
@@ -145,9 +191,13 @@ class App2 extends React.Component {
       <div className="musicApp">
         <div id="musicPlayer">
           <MusicPlayer
-            playPause={this.handleplayPause}
+            handleplay={this.handleplay}
             // playSong={this.state.playSong[0]}
             songImage={this.state.songImage}
+            songUri={this.state.songUri}
+            isPlaying={this.state.isPlaying}
+            handleForward={this.handleForward}
+            handlePrevious={this.handlePrevious}
           />
         </div>
         <div id="songsData">
@@ -206,6 +256,10 @@ class App2 extends React.Component {
                         handleFavourites={() => {
                           this.handleFavourites(item.track.uri);
                         }}
+                        handleDeleteFromPlaylists={() => {
+                          this.handleDeleteFromPlaylists(item.track.uri);
+                        }}
+                        isPlaying={this.state.isPlaying}
                       />
                     );
                   })}
@@ -233,3 +287,5 @@ class App2 extends React.Component {
 }
 
 export default App2;
+
+// BQCjkcDcIb71RjyYcKfFsDL8IZaDsu07zoo6DV3gMRMTaMskz51mROgbBULE64vWhuHAeqQQiPw2DRXPIOLEgFb2eC9-tLr9SzRaZYn572iCOnzZWuaBWpkK68HQRC4BCj415rhcoflU_LZ1pXffUxW1FNH-7NUibImlcFUPCpd8MlWVyES43kXGYun_KKzNXfliETwwitwcUDTem8LDnhr1K-uDBfUH4KKIEvGgcoWQzDy8aClBVM41OmqGObYo
