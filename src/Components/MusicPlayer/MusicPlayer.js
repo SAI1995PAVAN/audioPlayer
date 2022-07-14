@@ -1,7 +1,7 @@
 import React from "react";
 import "./MusicPlayer.css";
 import play from "./play.png";
-import pause from "./pause2.png";
+// import pause from "./pause2.png";
 import previous from "./previous.png";
 import next from "./next.png";
 import favouritesAfterClick from "./favourites.png";
@@ -10,7 +10,15 @@ import favouritesAfterClick from "./favourites.png";
 // import { SkipPreviousIcon, SkipNextIcon } from "@mui/icons-material";
 
 const MusicPlayer=(props)=> {
-  const{playSong,handleplay,songImage,songUri,isPlaying,handleForward,handlePrevious}=props
+  const {
+    
+    handleplay,
+    songImage,
+    songUri,
+    
+    handleForward,
+    handlePrevious,
+    handleFavouritesSymbol} = props
     return (
       <div id="playSong">
         <div id="songImage">
@@ -31,7 +39,7 @@ const MusicPlayer=(props)=> {
           <button id="playNextFunction" onClick={handleForward}>
             <img src={next} alt="" width="40px" height="40px" />
           </button> 
-          <button id="favourites">
+          <button id="favourites" onClick={handleFavouritesSymbol}>
             <img src={favouritesAfterClick} alt="" width="50px" height="50px" />
           </button>
         </div>
