@@ -18,7 +18,6 @@ class App2 extends React.Component {
     this.state = {
       selectedSongs: [],
       data: AllSongs.items,
-      // searchString: "",
       inputValue: "",
       mainCheckBox: false,
       individualCheckboxDisplay: "none",
@@ -28,6 +27,7 @@ class App2 extends React.Component {
       favouriteSongs: [],
       isPlaying: false,
       songUri: "",
+      likeButtonText: "like",
     };
   }
 
@@ -50,7 +50,7 @@ class App2 extends React.Component {
           });
         } else {
           this.setState({ selectedSongs: [] }, () => {
-            this.handleTogglefilter();
+            // this.handleTogglefilter();
             console.log(this.state.selectedSongs);
           });
         }
@@ -134,11 +134,15 @@ class App2 extends React.Component {
     let favouritesFiltered = this.state.playlistSongs.filter((item) => {
       return item.track.uri === uri;
     });
+
     let favouritesExisted = this.state.favouriteSongs.filter((item) => {
       return item.track.uri === favouritesFiltered[0].track.uri;
     });
+
     if (favouritesExisted.length > 0) {
-      this.setState({ favouriteSongs: [...this.state.favouriteSongs] });
+      this.setState({
+        favouriteSongs: [...this.state.favouriteSongs],
+      });
     } else {
       this.setState({
         favouriteSongs: [...this.state.favouriteSongs, ...favouritesFiltered],
@@ -212,7 +216,11 @@ class App2 extends React.Component {
       let newSelectedSongs = this.state.selectedSongs.filter((item) => {
         return item !== uri;
       });
-      this.setState({ selectedSongs: [...newSelectedSongs] });
+      this.setState({
+        selectedSongs: [...newSelectedSongs],
+        songPlayingNow: [],
+        songImage: "",
+      });
     });
   };
 
@@ -220,6 +228,7 @@ class App2 extends React.Component {
     let newDislikes = this.state.favouriteSongs.filter((item) => {
       return item.track.uri !== uri;
     });
+
     this.setState({ favouriteSongs: [...newDislikes] });
   };
 
@@ -307,6 +316,11 @@ class App2 extends React.Component {
                         handlePlayPause={() => {
                           this.handlePlayPause(item.track.uri);
                         }}
+                        likeButtonText={this.state.likeButtonText}
+                        trackURI={item.track.uri}
+                        favouriteSongs={this.state.favouriteSongs}
+                        playlistSongs={this.state.playlistSongs}
+                        songPlayingNow={this.state.songPlayingNow}
                       />
                     );
                   })}
