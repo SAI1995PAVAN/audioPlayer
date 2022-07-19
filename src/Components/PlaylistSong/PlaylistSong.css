@@ -13,4 +13,6 @@
   background-color: blueviolet;
   padding: 0px 30px;
   font: 1em;
+  width: 96px;
+  border-radius: 5px;
 }
